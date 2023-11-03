@@ -22,7 +22,7 @@ def ode(t, vars, a=-0.02, w=1, G=0, C=0):
 
 
 
-def integrate_hopf_scipy(ode, params, A, W, C, G):
+def integrate_hopf_scipy(params, A, W, C, G):
     # Get params
     n_samples = params['n_samples']
     nodes = params['nodes']
@@ -76,7 +76,7 @@ def numba_noise(size):
     return noise
 
 @jit(nopython=True)
-def integrate_hopf_euler_maruyama(ode, params, A, W, C, G):
+def integrate_hopf_euler_maruyama(params, A, W, C, G):
     # Get params
     n_samples = params['n_samples']
     nodes = params['nodes']

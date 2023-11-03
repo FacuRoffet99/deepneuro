@@ -16,7 +16,7 @@ def calc_length(start, end, step):
     return (end - start - 1) // step + 1
 
 @jit(nopython=True)
-def swFCD(signal, windowSize, windowStep):  # Compute the FCD of an input BOLD signal
+def swFCD(signal, windowSize=60, windowStep=20):  # Compute the FCD of an input BOLD signal
     (N, Tmax) = signal.shape
     lastWindow = Tmax - windowSize  # 190 = 220 - 30
     N_windows = calc_length(0, lastWindow, windowStep)  # N_windows = len(np.arange(0, lastWindow, windowStep))
