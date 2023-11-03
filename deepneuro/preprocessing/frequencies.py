@@ -1,5 +1,5 @@
 import numpy as np
-from filters import BandPassFilter
+from .filters import BandPassFilter
 
 def conv(u,v):  # python equivalent to matlab conv 'same' method
     # from https://stackoverflow.com/questions/38194270/matlab-convolution-same-to-numpy-convolve

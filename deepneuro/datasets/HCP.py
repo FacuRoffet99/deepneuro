@@ -57,9 +57,9 @@ def read_sc_matrices(data_file, max_files=None):
 def readHCP(ts_path, sc_path, save_path, max_files=None):
     unzip_files(ts_path, sc_path, save_path)
     # Read ts's
-    time_series = read_time_series(save_path+'/'+ts_path.split('/')[-1], max_files=None)
+    time_series = read_time_series(save_path+'/node_timeseries/3T_HCP1200_MSMAll_d25_ts2/', max_files=None)
     # Obtain SC matrices
-    SC_matrices = read_sc_matrices(save_path+'/'+sc_path.split('/')[-1], max_files=None)
+    SC_matrices = read_sc_matrices(save_path+'/netmats/3T_HCP1200_MSMAll_d25_ts2/netmats1.txt', max_files=None)
     # Get mean SC matrix
     mean_SC = SC_matrices.mean(axis=0)
     return time_series, SC_matrices, mean_SC
