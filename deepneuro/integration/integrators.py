@@ -57,7 +57,7 @@ def integrate_hopf_scipy(A, W, C, G, TR, t_use, init_min, init_max, t_min, t_max
 
 
 
-
+# The parameter 'size' in np.random.normal() is not supported by numba, this function fixes that
 @jit(nopython=True)
 def numba_noise(size):
     noise = np.empty(size,dtype=np.float64)
