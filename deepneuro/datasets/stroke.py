@@ -33,7 +33,7 @@ def readStroke(data_file):
     analyzeMatrix('SC', norm_SC_stroke)
 
     # Expand SC of HC to have one per subject
-    norm_SC_hc = norm_SC_hc[0][np.newaxis].repeat(len(data_hc), axis=0)
+    norm_SC_hc = norm_SC_hc[np.newaxis].repeat(len(data_hc), axis=0)
     analyzeMatrix('SC', norm_SC_hc)
 
     return (data_hc, data_acute, data_inter, data_chronic), (norm_SC_hc, norm_SC_stroke)
