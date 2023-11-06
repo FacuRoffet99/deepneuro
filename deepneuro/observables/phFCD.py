@@ -43,7 +43,7 @@ def numba_phFCD(phIntMatr_upTri, size_kk3):
 # Epochs of stable FC(t) configurations are reflected around the FCD diagonal in blocks of elevated
 # inter-FC(t) correlations.
 
-def phFCD(ts, discardOffset=10):  # Compute the FCD of an input BOLD signal
+def _phFCD(ts, discardOffset=10):  # Compute the FCD of an input BOLD signal
     phIntMatr = PhaseInteractionMatrix(ts)  # Compute the Phase-Interaction Matrix
     if not np.isnan(phIntMatr).any():  # No problems, go ahead!!!
         (N, Tmax) = ts.shape
@@ -62,6 +62,9 @@ def phFCD(ts, discardOffset=10):  # Compute the FCD of an input BOLD signal
     #     buildMatrixToSave(phfcd, npattmax - 2)
     return phfcd
 
+def phFCD(signal, discardOffset=10):
+    return np.array([_phFCD(ts) for ts in signal])
+
 def buildFullMatrix(FCD_data):
     LL = FCD_data.shape[0]
     # T is size of the matrix given the length of the lower/upper triangular part (displaced by 1)
@@ -71,8 +74,9 @@ def buildFullMatrix(FCD_data):
     fcd_mat += fcd_mat.T
     return fcd_mat
 
-def reduced_phFCD(ts, size, order=3):
-    observable = phFCD(ts)
-    mat = buildFullMatrix(observable)
-    resized = resize(mat, (size, size), order=order, anti_aliasing=True)
-    return resized    
+# If this wants to be used, it is necessary to fix the multiple subjects part(_phFCD vs phFCD)
+# def reduced_phFCD(ts, size, order=3):
+#     observable = phFCD(ts)
+#     mat = buildFullMatrix(observable)
+#     resized = resize(mat, (size, size), order=order, anti_aliasing=True)
+#     return resized    
