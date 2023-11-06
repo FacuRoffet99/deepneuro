@@ -22,17 +22,7 @@ def ode(t, vars, a=-0.02, w=1, G=0, C=0):
 
 
 
-def integrate_hopf_scipy(params, A, W, C, G):
-    # Get params
-    n_samples = params['n_samples']
-    nodes = params['nodes']
-    TR = params['TR']
-    t_use = params['t_use']
-    init_min = params['init_min']
-    init_max = params['init_max']
-    t_min = params['t_min']
-    t_max = params['t_max']
-
+def integrate_hopf_scipy(A, W, C, G, TR, t_use, init_min, init_max, t_min, t_max):
     n_samples, nodes = A.shape
 
     # Create arrays with the correct shapes
@@ -76,19 +66,7 @@ def numba_noise(size):
     return noise
 
 @jit(nopython=True)
-def integrate_hopf_euler_maruyama(params, A, W, C, G):
-    # Get params
-    n_samples = params['n_samples']
-    nodes = params['nodes']
-    TR = params['TR']
-    t_use = params['t_use']
-    init_min = params['init_min']
-    init_max = params['init_max']
-    t_min = params['t_min']
-    t_max = params['t_max']
-    dt = params['dt']
-    sigma = params['sigma']
-
+def integrate_hopf_euler_maruyama(A, W, C, G, TR, t_use, init_min, init_max, t_min, t_max, dt, sigma):
     n_samples, nodes = A.shape
 
     # Sample time
